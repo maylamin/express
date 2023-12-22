@@ -90,6 +90,6 @@ app.use('/api/v1/tours/:id',tourRouter);
 
 
 
-app.listen(8000, '127.0.0.1', () => {
+app.listen(8000, '0.0.0.0', () => {
     console.log('Server is listening on port 8000');
 });
