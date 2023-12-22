@@ -10,6 +10,16 @@ exports.getAllTours = (req,res)=>{
     })
 }
 
+exports.checkbody=(req,res,next)=>{
+    if (!req.body.name || !req.body.duration){
+        return  res.status(400).json({
+            status: "fail",
+            message: "missing name and duration",
+          });
+    }
+    next();
+}
+
 exports.postNewTours=(req,res)=>{
     const newTour = {
         id: tours.length,
@@ -34,6 +44,16 @@ exports.postNewTours=(req,res)=>{
         })
 
 }
+exports.checkId = (req, res, next, val) => {
+    console.log(`Tour id is ${val}`);
+    if (req.params.id * 1 > tours.length) {
+      res.status(404).json({
+        status: "fail",
+        message: "Invalid ID",
+      });
+    }
+    next();
+  };
 
 exports.getTourById=(req,res)=>{
     console.log(req.params);

@@ -1,6 +1,9 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
+const dotenv = require('dotenv')
+dotenv.config('./.env')
 const userRouter = require('./routers/users_router.js')
 const tourRouter = require('./routers/tours_router.js')
 const middleware = require('./middleware/logger.js')
@@ -9,87 +12,74 @@ app.use(morgan('dev'))
 app.use(middleware.mylogger)
 app.use(express.json())
 
+app.use(cors({
+    origin:'*'
+}));
+
 app.use('/api/v1/tours',tourRouter);
 app.use('/api/v1/tours/:id',tourRouter);
 
 
-
-
-// app.get('/user', (req, res) => {
-//     res.status(200).json({
-//         message: "Welcome from Mayla's users Server",
-
-//     })
-// })
-
-// app
-//     .route('/api/v1/users/register')
-//     .post(userService.register)
-// app
-//     .route('/api/v1/users/login')
-//     .post(userService.login)
-// app
-//     .route('/api/v1/users/:id')
-//     .get(userService.getUserById)
-//     .patch(userService.upDateUser)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(8000, '0.0.0.0', () => {
-    console.log('Server is listening on port 8000');
+app.listen(process.env.PORT, '0.0.0.0', () => {
+    console.log(`Server is listening on port ${process.env.PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
